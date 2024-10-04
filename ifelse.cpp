@@ -12,7 +12,6 @@ int main ()
     }
     else 
     cout << "number is odd ";
-clrscr ()
 return 0 ;
 
 }
