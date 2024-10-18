@@ -2,16 +2,28 @@
 using namespace std ;
 int main ()
 {
-    int a ;
-    cout << "enter integer = \n";
-    cin >> a ;
-    if ( a % 2 == 0 )
-    {
-        cout << " number is even " ;
-
-    }
-    else 
-    cout << "number is odd ";
-return 0 ;
-
+	int hours ;
+	cout << " enter hours =";
+	cin>> hours ;
+	if ( hours >= 0 && hours <= 6 )
+	{
+		cout << "midnight time of am ";
+	}
+	else if  ( hours > 6 && hours <= 12 )
+	{ 
+	 cout << "morning time of am " ;
+	}
+	else if (hours > 12 && hours <= 18)
+	{
+		cout << "evening of pm " ;
+	}
+	else if (hours > 18 && hours <= 24 )
+	{
+		cout << "night of pm";
+	}
+	else 
+	{
+		cout << " invalid "; 
+	}
+	return 0;
 }
