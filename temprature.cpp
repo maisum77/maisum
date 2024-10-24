@@ -2,11 +2,11 @@
 using namespace std ;
 int main ()
 {
-	chr temp ;
+	char temp ;
 	int c,f,k,num;
-	cout << "enter C for celsius F for fahrenheit and K for kelvin = "
+	cout << "enter C for celsius F for fahrenheit and K for kelvin = ";
 	cin >> temp ;
-	if (temp == c || temp == C)
+	if (temp == 'c' || temp == 'C' )
 	{
 		cout << "enter temperature = "<< endl;
 		cin >> c ;
@@ -28,10 +28,10 @@ int main ()
 		}
 		
 	}
-	else if ( temp== f || temp == F )
+	else if ( temp== 'f' || temp == 'F' )
 	     {
 	     	cout << "enter temperature = "<< endl;
-	     		cin >> f
+	     		cin >> f ;
 		    cout << "1= fahrenheit to calcius \n";
 		    cout << "2= fahrenheit to kelvin \n";
 		    cin >> num ;
@@ -50,10 +50,10 @@ int main ()
 		}
 		
 	     }
-	else if ( temp == K || temp == k)
+	else if ( temp == 'K' || temp == 'k')
 	      {
 	      	cout << "enter temperature = "<< endl;
-	     		cin >> k
+	     		cin >> k ;
 		    cout << "1= kelvin to calcius \n";
 		    cout << "2= kelvin to fahrenheit \n";
 		    cin >> num ;
@@ -64,11 +64,17 @@ int main ()
 					cout << "result =" << c ;
 				break ;
 			case 2 :
+			      f = 1.8 * ( k - 273 )  + 32
 			        ;
 					cout << "result ="<< k ;
 			    break ; 
 			default :
 				cout << "invalid temperature";		
 		}
-	      }     
+	      }  
+	else 
+	{
+		cout << "invalid data";
+	}
+	return 0 ;	     
 }
