@@ -11,10 +11,7 @@ int main ()
         {
             cout << "a is greatest";
         }
-        else 
-        {
-            cout << "a is greater then b";
-        }
+        
     }
     else if (b>a)
     {
@@ -22,15 +19,14 @@ int main ()
         {
             cout << "b is greatest";
         }
-        else
+        else 
         {
-            cout << "b is greater than a";
+            cout <<"c is greatest";
         }
-
     }
     else 
     {
-        cout << "c is greatest ";
+        cout << "invalid data";
     }
-    return 0 ;
+    return 0 ; 
 }
