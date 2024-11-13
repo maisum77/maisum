@@ -2,11 +2,12 @@
 using namespace std;
 int main()
 {
-	 int area;
+	 int a,area;
 	cout<<"1.area of a circle\n 2.area of a rectangle\n 3.area of a triangle\n=";
-	switch(area)
+	cin>>a;
+	switch(a)
 	{
-		case1:
+		case 1:
 			{
 				int raduis;
 					cout<<"raduis of a circle:"<<endl;
@@ -15,7 +16,7 @@ int main()
 			cout<<"area of a circle ="<<area;
 			break;
 			}
-			case2:
+			case 2:
 				{
 					int len, width;
 					cout<<"lenght and width of a rectangle:"<<endl;
@@ -25,7 +26,7 @@ int main()
 				cout<<"area of a rectangle="<<area;
 				break;
 				}
-				case3:
+				case 3:
 					{
 						int base,height;
 						cout<<"base and height of a triangle:"<<endl;
@@ -34,12 +35,12 @@ int main()
 						cout<<"area of a triangle is="<<area;
 						
 						break;
-                    }   
-						default:
-                        {
-							cout<<"quit:";
-                        }
-					
+						
+					}
+		default:
+        {
+		cout<<"quit:";
+        }			
 	}
-	return 0;
+	
 }
