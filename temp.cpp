@@ -1,33 +1,79 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    int arr[3][3] = {{1,2,3},
-                     {4,5,6},
-                     {7,8,9}};
-                     
-    int greatest = arr[0][0];  // Initialize with first element
-    int smallest = arr[0][0];  // Initialize with first element
+int main() {
+    int arr[3][3];
+    int arr2[3][3] = {0}; // Initialize with 0
+    int oneD[9];
+    int count = 1, temp = 0;
 
-    // Find greatest
-    for(int i=0; i<3; i++) {
-        for(int j=0; j<3; j++) {
-            if(arr[i][j] > greatest)  // Use > for comparison
-                greatest = arr[i][j];
+    // Input the 3x3 matrix
+    cout << "Enter the elements of the matrix:" << endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << count << ") ";
+            cin >> arr[i][j];
+            count++;
         }
     }
 
-    // Find smallest 
-    for(int a=0; a<3; a++) {
-        for(int b=0; b<3; b++) {
-            if(arr[a][b] < smallest)  // Use < for comparison
-                smallest = arr[a][b];
+    // Display the input matrix
+    cout << "\nInput Matrix:" << endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Convert 2D array to 1D array
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            oneD[temp++] = arr[i][j];
         }
     }
 
-    cout<<"greatest number in the array = "<<greatest<<endl;
-    cout<<"smallest number in the array = "<<smallest<<endl;
-    
+    // Spiral order filling of arr2
+    int srow = 0, scol = 0, endrow = 2, endcol = 2, index = 0;
+
+    while (srow <= endrow && scol <= endcol) {
+        // Top row (left to right)
+        for (int col = scol; col <= endcol; col++) {
+            arr2[srow][col] = oneD[index++];
+        }
+        srow++;
+
+        // Right column (top to bottom)
+        for (int row = srow; row <= endrow; row++) {
+            arr2[row][endcol] = oneD[index++];
+        }
+        endcol--;
+
+        // Bottom row (right to left)
+        if (srow <= endrow) {
+            for (int col = endcol; col >= scol; col--) {
+                arr2[endrow][col] = oneD[index++];
+            }
+            endrow--;
+        }
+
+        // Left column (bottom to top)
+        if (scol <= endcol) {
+            for (int row = endrow; row >= srow; row--) {
+                arr2[row][scol] = oneD[index++];
+            }
+            scol++;
+        }
+    }
+
+    // Display the spiral matrix
+    cout << "\nSpiral Matrix:" << endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << arr2[i][j] << " ";
+        }
+        cout << endl;
+    }
+
     return 0;
 }
