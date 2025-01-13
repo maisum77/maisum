@@ -1,79 +1,127 @@
-#include <iostream>
+#include<iostream>
+#include<string>
 using namespace std;
-
-int main() {
-    int arr[3][3];
-    int arr2[3][3] = {0}; // Initialize with 0
-    int oneD[9];
-    int count = 1, temp = 0;
-
-    // Input the 3x3 matrix
-    cout << "Enter the elements of the matrix:" << endl;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            cout << count << ") ";
-            cin >> arr[i][j];
-            count++;
+void initialize_structure(string layout[][41])
+{
+    for(int i=0;i<20;i++)
+    {
+        layout[i][0]="apartment"+to_string(i+1);
+    }
+    for(int j=0;j<20;j++)
+    {
+        for(int k=1;k<41;k++)
+        {
+            layout[j][k]="#";
         }
     }
-
-    // Display the input matrix
-    cout << "\nInput Matrix:" << endl;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            cout << arr[i][j] << " ";
+}
+void layoutdisplay(string layout[][41])
+{
+    
+    for(int k=0;k<20;k++)
+    {
+        for(int l=0;l<41;l++)
+        {
+            cout<<layout[k][l]<<" ";
         }
-        cout << endl;
+        cout<<endl;
+    }
+}
+int main()
+{
+    string layout[20][41];
+    int price [20];
+    int choice;
+    int a,b;
+    int exit=0;
+    initialize_structure(layout); //initialize the structure of the seats
+    layoutdisplay(layout);// display seats layout
+    //for entering prices for each compartments 
+    cout << "---enter price for each apartment---" << endl;
+    for(int i = 0; i < 20; i++)  
+    {
+        cout << "enter price for " << layout[i][0] << " = ";
+        cin >> price[i];
     }
 
-    // Convert 2D array to 1D array
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            oneD[temp++] = arr[i][j];
-        }
-    }
-
-    // Spiral order filling of arr2
-    int srow = 0, scol = 0, endrow = 2, endcol = 2, index = 0;
-
-    while (srow <= endrow && scol <= endcol) {
-        // Top row (left to right)
-        for (int col = scol; col <= endcol; col++) {
-            arr2[srow][col] = oneD[index++];
-        }
-        srow++;
-
-        // Right column (top to bottom)
-        for (int row = srow; row <= endrow; row++) {
-            arr2[row][endcol] = oneD[index++];
-        }
-        endcol--;
-
-        // Bottom row (right to left)
-        if (srow <= endrow) {
-            for (int col = endcol; col >= scol; col--) {
-                arr2[endrow][col] = oneD[index++];
+    while (exit==0)
+    {
+       cout<<"---Train reservation platform---"<<endl;
+       cout<<"1=show layout of the seats "<<endl;//show layout of the seats in the train
+       cout<<"2=reserve seat"<<endl;//allow to reserve seats
+       cout<<"3=total sales"<<endl;//show total sales
+       cout<<"4=Quit"<<endl;//end the program
+       rewrite://take the flow fo goto here to take the choice again
+       cout<<"enter 1-4 to perform the action="<<endl;
+       cin>>choice;
+       if(choice>4 || choice<=0)
+       {
+           cout<<"Error please select from the given option"<<endl;
+           goto rewrite;//redirect the flow to reselect the number
+       }
+       
+       
+       switch(choice)
+       {
+           case 1://for layout
+           {
+               layoutdisplay(layout);// display seats layout
+               break;
+           }
+           case 2://for reservation
+           {
+               a=0;
+               b=0;
+               again:
+               cout<<"--reserving seats--"<<endl;
+               cout<<"apartment number=";
+               cin>>a;
+               cout<<endl;
+               cout<<"seat number =";
+               cin>>b;
+               cout<<endl;
+               if(layout[a-1][b]=="*")
+               {
+                   cout<< "seat already reserved.Please select another one";
+                   goto again;
+               }
+               else
+               {
+                   layout[a-1][b]='*';
+                   cout<<"reservation successful"<<endl;
+               }
+               layoutdisplay(layout);
+               break;
+           }
+           case 3://for total sales 
+           {
+            int totalSale = 0;
+            for(int i = 0; i < 20; i++)  
+            {
+              int reservedSeats = 0;
+              for(int j = 1; j < 41; j++)  
+              {
+                if(layout[i][j] == "*") //check if the current apparment have reversed seats 
+                {
+                  reservedSeats++;
+                }
+              }
+                totalSale += reservedSeats * price[i]; //take the all prices into total price variable 
+                
             }
-            endrow--;
-        }
-
-        // Left column (bottom to top)
-        if (scol <= endcol) {
-            for (int row = endrow; row >= srow; row--) {
-                arr2[row][scol] = oneD[index++];
-            }
-            scol++;
-        }
+              cout << "Total sales across all apartments= $" << totalSale << endl;
+              break;
+   
+           }
+           case 4: //for exiting the loop
+           {
+               exit++;
+               break;
+           }
+   
+   
+       }
     }
-
-    // Display the spiral matrix
-    cout << "\nSpiral Matrix:" << endl;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            cout << arr2[i][j] << " ";
-        }
-        cout << endl;
-    }
-
+    
     return 0;
 }
