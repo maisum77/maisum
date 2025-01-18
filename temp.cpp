@@ -95,21 +95,21 @@ int main()
            }
            case 3://for total sales 
            {
-            int totalSale = 0;
+            int totalsale = 0;
             for(int i = 0; i < 20; i++)  
             {
-              int reservedSeats = 0;
+              int reservedseats = 0;
               for(int j = 1; j < 41; j++)  
               {
                 if(layout[i][j] == "*") //check if the current apparment have reversed seats 
                 {
-                  reservedSeats++;
+                  reservedseats++;
                 }
               }
-                totalSale += reservedSeats * price[i]; //take the all prices into total price variable 
+                totalsale += reservedseats * price[i]; //take the all prices into total price variable 
                 
             }
-              cout << "Total sales across all apartments= $" << totalSale << endl;
+              cout << "Total sales across all apartments= "<<endl<<"$" << totalsale << endl;
               break;
    
            }
