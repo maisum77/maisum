@@ -18,7 +18,7 @@ int main()
     cout<<"enter second number= ";
     cin>>b;
     int num = gcd(a,b);
-    cout<<"gcd of the number are = "<< num <<endl ;
+    cout<<"gcd of the number are = "<< num <<endl; ;
     int lcm = a*b/num ;
     cout<<"lcm of the number is = "<<lcm;
     return 0;
