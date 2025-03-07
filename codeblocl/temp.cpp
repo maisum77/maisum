@@ -1,27 +1,25 @@
 #include<iostream>
 #include<string>
 using namespace std;
-class Game
+class Name
 {
 public:
-    string name;
-    int rating;
-    void in()
+    int num;
+   // float num1;
+    Name(int a)
     {
-        cout<<"rating for game is = "<<endl;
-        cin>>rating;
+        num=a;
     }
-    void out(string name)
+    Name(float a)
     {
-        cout<<"name of the game is = "<<name<<endl;
-        cout<<"rating of the game is = "<<rating<<endl;
+        num=a;
     }
-};
 
+};
 int main()
 {
-    Game obj;
-    obj.in();
-    obj.out("Valorant");
+    Name obj(12);
+    cout<<obj.num;
 
+    return 0;
 }
