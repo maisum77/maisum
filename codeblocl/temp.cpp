@@ -1,25 +1,32 @@
 #include<iostream>
-#include<string>
-using namespace std;
-class Name
+using namespace std ;
+class Robot
 {
-public:
-    int num;
-   // float num1;
-    Name(int a)
-    {
-        num=a;
-    }
-    Name(float a)
-    {
-        num=a;
-    }
 
+    public:
+    void PerformTask(string task)
+    {
+        cout<<"task= "<<task<<endl;
+        cout<<"----------"<<endl;
+    }
+    void PerformTask(string task,int duration)
+    {
+        cout<<"task= "<<task<<endl;
+        cout<<"duration= "<<duration<<endl;
+        cout<<"----------"<<endl;
+    }
+    void PerformTask(string task, int duration, string priority)
+    {
+        cout<<"task= "<<task<<endl;
+        cout<<"duration= "<<duration<<endl;
+        cout<<"priority= "<<priority<<endl;
+    }
 };
-int main()
+int main ()
 {
-    Name obj(12);
-    cout<<obj.num;
-
+    Robot obj;
+    obj.PerformTask("clean");
+    obj.PerformTask("market",120);
+    obj.PerformTask("call",120,"high");
     return 0;
 }
