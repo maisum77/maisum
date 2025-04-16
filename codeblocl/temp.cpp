@@ -1,32 +1,95 @@
 #include<iostream>
-using namespace std ;
-class Robot
+#include<string>
+using namespace std;
+class Login
 {
+public:
+    bool login()
+    {
+        string username,password;
+        cout<<"LMS SYSTEMS\n";
+        cout<<"enter username= "<<endl;
+        cin>>username;
+        cout<<"enter password= "<<endl;
+        cin>>password;
 
-    public:
-    void PerformTask(string task)
+    if(username=="abc"&& password=="abc123")
     {
-        cout<<"task= "<<task<<endl;
-        cout<<"----------"<<endl;
+        cout<<"login successfull! welcome "<<username<<endl;
+        return true;
     }
-    void PerformTask(string task,int duration)
+    else
     {
-        cout<<"task= "<<task<<endl;
-        cout<<"duration= "<<duration<<endl;
-        cout<<"----------"<<endl;
+        cout<<"incorrect input"<<endl;
+        return false;
     }
-    void PerformTask(string task, int duration, string priority)
-    {
-        cout<<"task= "<<task<<endl;
-        cout<<"duration= "<<duration<<endl;
-        cout<<"priority= "<<priority<<endl;
     }
 };
-int main ()
+
+class course
 {
-    Robot obj;
-    obj.PerformTask("clean");
-    obj.PerformTask("market",120);
-    obj.PerformTask("call",120,"high");
+public:
+    void viewcources()
+    {
+        cout<<"your cources"<<endl;
+        cout<<"OOP"<<endl;
+        cout<<"Database"<<endl;
+        cout<<"DLD"<<endl;
+    }
+    void notification()
+    {
+        cout<<"notification:"<<endl;
+        cout<<"mid term exams datesheet"<<endl;
+        cout<<"oop lab will be on 17"<<endl;
+        cout<<"holiday of tommorow"<<endl;
+
+    }
+};
+
+class LMSportal : public Login, public course
+{
+
+};
+
+int main()
+{
+    LMSportal st;
+    int choice;
+    if (!st.login())
+    {
+        return 0;
+    }
+    do
+    {
+        cout<<"LMS dashboard"<<endl;
+        cout<<"1.view cources"<<endl;
+        cout<<"2.view notification"<<endl;
+        cout<<"0.logout"<<endl;
+        cin>>choice;
+        switch(choice)
+        {
+        case 1:
+            {
+                st.viewcources();
+                break;
+            }
+        case 2:
+            {
+                st.notification();
+                break;
+            }
+        case 0:
+            {
+                cout<<"loging out"<<endl;
+                return 0;
+            }
+        default:
+        {
+        cout<<"invalid options"<<endl;
+        }
+
+        }
+    } while (choice!=0);
+
     return 0;
 }

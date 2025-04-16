@@ -54,7 +54,10 @@ class calculator
     }
     int power(int a, int b)
     {
-        result=a^b;
+        result=a;
+        for (int i=1; i<b; i++){
+            result *= a;
+        }
         return result;
     }
     void printHistory() {
