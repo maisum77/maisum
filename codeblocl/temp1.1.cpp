@@ -151,3 +151,106 @@ public:
         cout << "--------------------------" << endl;
     }
 };
+
+int main() {
+    int choice;
+    bool exitSystem = false;
+
+    // Create a student and instructor
+    StudentInstructor student("John Doe", "john@example.com", false);
+    StudentInstructor instructor("Dr. Smith", "smith@example.com", true);
+
+    while (!exitSystem) {
+        cout << "\n=== Learning Management System ===" << endl;
+        cout << "1. Login as Student" << endl;
+        cout << "2. Login as Instructor" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice (1-3): ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                int studentChoice;
+                bool studentMenu = true;
+
+                cout << "\n=== Student Portal ===" << endl;
+                student.displayDetails();
+
+                while (studentMenu) {
+                    cout << "\nStudent Menu:" << endl;
+                    cout << "1. View Available Courses" << endl;
+                    cout << "2. Enroll in Course" << endl;
+                    cout << "3. View Enrolled Courses" << endl;
+                    cout << "4. Return to Main Menu" << endl;
+                    cout << "Enter your choice (1-4): ";
+                    cin >> studentChoice;
+
+                    switch (studentChoice) {
+                        case 1:
+                            student.displayAvailableCourses();
+                            break;
+                        case 2: {
+                            int courseNum;
+                            cout << "Enter course number to enroll: ";
+                            cin >> courseNum;
+                            student.enrollInCourse(courseNum);
+                            break;
+                        }
+                        case 3:
+                            student.displayEnrolledCourses();
+                            break;
+                        case 4:
+                            studentMenu = false;
+                            break;
+                        default:
+                            cout << "Invalid choice!" << endl;
+                    }
+                }
+                break;
+            }
+            case 2: {
+                int instructorChoice;
+                bool instructorMenu = true;
+
+                cout << "\n=== Instructor Portal ===" << endl;
+                instructor.displayDetails();
+
+                while (instructorMenu) {
+                    cout << "\nInstructor Menu:" << endl;
+                    cout << "1. Upload New Course" << endl;
+                    cout << "2. Manage Courses" << endl;
+                    cout << "3. Return to Main Menu" << endl;
+                    cout << "Enter your choice (1-3): ";
+                    cin >> instructorChoice;
+
+                    switch (instructorChoice) {
+                        case 1: {
+                            string courseName;
+                            cout << "Enter course name to upload: ";
+                            cin.ignore();
+                            getline(cin, courseName);
+                            instructor.uploadCourse(courseName);
+                            break;
+                        }
+                        case 2:
+                            instructor.manageCourses();
+                            break;
+                        case 3:
+                            instructorMenu = false;
+                            break;
+                        default:
+                            cout << "Invalid choice!" << endl;
+                    }
+                }
+                break;
+            }
+            case 3:
+                exitSystem = true;
+                cout << "\nThank you for using the Learning Management System!\n" << endl;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    }
+    return 0;
+}

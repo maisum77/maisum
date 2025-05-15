@@ -1,176 +1,99 @@
 #include<iostream>
+#include<string>
+#include<algorithm>
+#include<cctype>
 using namespace std;
-class Student
-{
- private:
- int student_id ;
- string name;
- double GPA;
- public:
- static int total_student;
- Student(int id, string name, double gpa)
- {
-    student_id=id;
-    this->name=name;
-    GPA=gpa;
-    total_student++;
- }
- Student()
- {
-    total_student++;
- }
- bool operator > (Student obj)
- {
-    return GPA>obj.GPA;
- }
- void display_details()
- {
-    cout<<"Student_id= "<<student_id<<endl;
-    cout<<"Name= "<<name<<endl;
-    cout<<"GPA= "<<GPA<<endl;
- }
-  friend class ReportGenerator;
-};
-int Student:: total_student=0;
 
-
-//parent class
-class Course
+class Employee
 {
     protected:
-    int courseCode;
-    string title ;
-    int credit;
+    float totalsales;
     public:
-    Course(int code, string title,int credit)
+    Employee(float sales)//setter function
     {
-        courseCode=code;
-        this->title=title;
-        this->credit=credit;
+        totalsales=sales;
     }
-    Course operator +(string add)
+    float getsales()//getter function
     {
-        title=title+" "+add;
+        return totalsales;
     }
-
-    void enrollStudent(Student &s)
+    void showsales()
     {
-        cout<<"enrolling student using student obj"<<endl;
-        s.display_details();
-        cout<<"enrolled in the course= "<<title<<endl;
-    }
-    void enrollStudent(int studentId) {
-        cout << "Enrolling student using ID: " << studentId << endl;
-        cout << "Enrolled in course: " << title << endl;
-    }
-
-    ~Course()
-    {
-        cout<<"Course "<<courseCode<<"removed"<<endl;
-    }
-
-};
-
-class Regular_course : public Course {
-public:
-    Regular_course(int code, string title, int credit) 
-        : Course(code, title, credit) {
-        classroomNumber = 0;
-    }
-    int classroomNumber;
-    void classroom()
-    {
-        cout<<"enter classroom number= "<<endl;
-        cin>>classroomNumber;
-    }
-    
-};
-
-class Online_course : public Course {
-public:
-    Online_course(int code, string title, int credit) 
-        : Course(code, title, credit) {
-        platform = "";
-    }
-    string platform;
-    void used_platform()
-    {
-        cout<<"enter platform used= "<<endl;
-        cin>>platform;
+        cout<<"toatal sales "<<totalsales<<endl;
     }
 };
-
-class Faculty
+class Role:public Employee
 {
-    private:
-    int faculty_id;
-    string department;
+    protected:
+    string rolename;
     public:
-    Faculty(int a, string b)
+    Role(float sales,string role):Employee(sales)
     {
-        faculty_id=a;
-        department=b;
+        rolename=role;
     }
-    friend class ReportGenerator;
-    
+    void showrole()
+    {
+        cout<<"Role="<<rolename<<endl;
+    }
+    void tolowercase(string &str)
+    {
+        transform(str.begin(), str.end(), str.begin(), ::tolower);
+    }
+    string getrole()
+    {
+        tolowercase(rolename);
+        return rolename;
+    }
 };
-class ReportGenerator
+
+class SalesCommission: public Role
+
 {
     public:
-    
-    void generateReport(Student s)
+    SalesCommission(float sales,string role):Role(sales,role)
     {
-        cout << "\n----- Student Report -----" << endl;
-            cout << "Student ID: " << s.student_id << endl;
-            cout << "Name: " << s.name << endl;
-            cout << "GPA: " << s.GPA << endl;
-            cout << "-----------------------" << endl;
+
+    }
+    float calculate_commission()
+    {
+        string roleLower=getrole();//get role from the user and store in the variable
+        if(roleLower=="saleperson")
+        {
+            return (getsales()*10)/100;
+        }
+        else if(roleLower=="manger")
+        {
+            return(getsales()*15)/100;
+        }
+        else if (roleLower=="senior manager")
+        {
+            return(getsales()*20)/100;
+        }
+        else{
+            return 0;
+        }
+
+    }
+    void showcommission()
+    {
+        float commission=calculate_commission();
+        cout<<"commission"<<commission<<endl;
     }
 };
-
-class TeachingAssistant:public virtual Student,public virtual Faculty
+int main()
 {
-
-};
-
-class Department:public Faculty
-{};
-
-int main() {
-    // Create students
-    Student student1(1001, "John Doe", 3.75);
-    Student student2(1002, "Jane Smith", 3.90);
-    
-    // Create courses
-    Course programmingCourse(101, "Programming", 3);
-    Regular_course mathCourse(102, "Mathematics", 3);
-    Online_course webCourse(103, "Web Development", 3);
-    
-    //Student enrollment confirmation
-    cout << "\n----- Student Enrollment -----" << endl;
-    programmingCourse.enrollStudent(student1);
-    webCourse.enrollStudent(1002);  
-    
-    //GPA comparison result
-    cout << "\n----- GPA Comparison -----" << endl;
-    if(student1 > student2) {
-        cout << "Student1 has higher GPA" << endl;
-    } else {
-        cout << "Student2 has higher GPA" << endl;
-    }
-    
-    // Report showing student's private GPA
-    ReportGenerator report;
-    cout << "\n----- Student Report -----" << endl;
-    report.generateReport(student1);
-    
-    // Total students count
-    cout << "\n----- Total Students -----" << endl;
-    cout << "Total number of students: " << Student::total_student << endl;
-    
-    
-    
+    float sale;
+    string role;
+    cout<<"enter total sales= "<<endl;
+    cin>>sale;
+    cout<<"enter the employee(salesperson,manager,senior manger)= "<<endl;
+    cin.ignore();
+    getline(cin,role);
+    SalesCommission e(sale,role);
+    cout<<"employee details= "<<endl;
+    e.showrole();
+    e.showsales();
+    e.showcommission();
     return 0;
+    
 }
-
-
