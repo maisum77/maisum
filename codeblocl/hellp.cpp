@@ -7,7 +7,7 @@ private:
     string brand;
     string model;
 public:
-    Vehicle(string b, string m){ 
+    Vehicle(string b, string m){
         brand=b;
         model=m ;
         cout << "Brand: " << brand << ", Model: " << model << endl;
@@ -17,13 +17,13 @@ public:
     }
 };
 
-class Car : public Vehicle 
+class Car : public Vehicle
 {
 private:
     string fuelType;
 public:
     Car(string b, string m, string f) : Vehicle(b, m)
-    { 
+    {
         fuelType=f;
     }
     void startEngine() {
