@@ -1,29 +1,20 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main()
-{
-    int num[4];
-    cout<<"enter number that need to be sorted\n";
-    for(int i=0;i<=3;i++)
-    {
-        cout<<i+1<<") ";
-        cin>>num[i];
-    }
-    
-    for(int j=0;j<=3;j++)
-    {
-        for(int l=0;l<=3;l++)
-        {
-         if(num[j]>num[l])
-         {
-             swap(num[j],num[l]);
-         }
-        } 
-    }
-    for(int k=0;k<=3;k++)
-    {
-        cout<<k+1<<") ";
-        cout<<num[k]<<endl;;
-    }
-    return 0;
+
+class Distance {
+int meters;
+public:
+Distance(int m) : meters(m) {}
+Distance operator+(Distance d) {
+return Distance(meters + d.meters);
+}
+void display() {
+cout << "Distance: " << meters << " meters" << endl;
+}
+};
+int main() {
+Distance d1(5), d2(10), d3(0);
+d3 = d1 + d2;
+d3.display();
+return 0;
 }

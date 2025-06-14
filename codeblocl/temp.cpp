@@ -1,95 +1,66 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
-class Login
-{
+class Image {
 public:
-    bool login()
-    {
-        string username,password;
-        cout<<"LMS SYSTEMS\n";
-        cout<<"enter username= "<<endl;
-        cin>>username;
-        cout<<"enter password= "<<endl;
-        cin>>password;
-
-    if(username=="abc"&& password=="abc123")
-    {
-        cout<<"login successfull! welcome "<<username<<endl;
-        return true;
-    }
-    else
-    {
-        cout<<"incorrect input"<<endl;
-        return false;
-    }
-    }
+    virtual void load() = 0;
+    virtual void display() = 0;
+    virtual ~Image() {}
 };
 
-class course
-{
+class JPEGImage : public Image {
 public:
-    void viewcources()
-    {
-        cout<<"your cources"<<endl;
-        cout<<"OOP"<<endl;
-        cout<<"Database"<<endl;
-        cout<<"DLD"<<endl;
+    void load() override {
+        cout << "Loading JPEG image using specific JPEG decompression algorithms." << std::endl;
     }
-    void notification()
-    {
-        cout<<"notification:"<<endl;
-        cout<<"mid term exams datesheet"<<endl;
-        cout<<"oop lab will be on 17"<<endl;
-        cout<<"holiday of tommorow"<<endl;
 
+    void display() override {
+        cout << "Displaying JPEG image on screen with optimized rendering for JPEGs." << std::endl;
     }
 };
 
-class LMSportal : public Login, public course
-{
+class PNGImage : public Image {
+public:
+    void load() override {
+        cout << "Loading PNG image using zlib decompression and filtering algorithms." << std::endl;
+    }
 
+    void display() override {
+        cout << "Displaying PNG image, handling transparency if present." << std::endl;
+    }
 };
 
-int main()
-{
-    LMSportal st;
-    int choice;
-    if (!st.login())
-    {
-        return 0;
+class BMPImage : public Image {
+public:
+    void load() override {
+        cout << "Loading BMP image directly from uncompressed pixel data." << std::endl;
     }
-    do
-    {
-        cout<<"LMS dashboard"<<endl;
-        cout<<"1.view cources"<<endl;
-        cout<<"2.view notification"<<endl;
-        cout<<"0.logout"<<endl;
-        cin>>choice;
-        switch(choice)
-        {
-        case 1:
-            {
-                st.viewcources();
-                break;
-            }
-        case 2:
-            {
-                st.notification();
-                break;
-            }
-        case 0:
-            {
-                cout<<"loging out"<<endl;
-                return 0;
-            }
-        default:
-        {
-        cout<<"invalid options"<<endl;
-        }
 
-        }
-    } while (choice!=0);
+    void display() override {
+        cout << "Displaying BMP image with straightforward pixel mapping." << std::endl;
+    }
+};
+
+void processImage(Image* img) {
+    cout << "\n--- Processing an image ---" << std::endl;
+    img->load();
+    img->display();
+    cout << "--- Image processing complete ---" << std::endl;
+}
+
+int main() {
+    JPEGImage jpegImg;
+    PNGImage pngImg;
+    BMPImage bmpImg;
+
+    processImage(&jpegImg);
+    processImage(&pngImg);
+    processImage(&bmpImg);
+
+    Image* myImage = new JPEGImage();
+    myImage->load();
+    myImage->display();
+
 
     return 0;
 }

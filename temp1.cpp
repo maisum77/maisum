@@ -1,37 +1,66 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-class Appliance {
-private:
-    string brand;
-    int power;
+class Image {
 public:
-    Appliance(string b, int p) 
-    {
-        brand=b, power=p; 
-        cout << "Brand: " << brand << ", Power: " << power << "W" << endl;
+    virtual void load() = 0;
+    virtual void display() = 0;
+    virtual ~Image() {}
+};
+
+class JPEGImage : public Image {
+public:
+    void load() override {
+        cout << "Loading JPEG image using specific JPEG decompression algorithms." << std::endl;
     }
-    virtual void start() {
-        cout << "Starting basic appliance..." << endl;
+
+    void display() override {
+        cout << "Displaying JPEG image on screen with optimized rendering for JPEGs." << std::endl;
     }
 };
 
-class SmartOven : public Appliance {
-private:
-    string mode;
+class PNGImage : public Image {
 public:
-    SmartOven(string b, int p, string m) : Appliance(b, p)
-    {
-        mode=m; 
+    void load() override {
+        cout << "Loading PNG image using zlib decompression and filtering algorithms." << std::endl;
     }
-    void start()  {
-        cout << "Starting Smart Oven in " << mode << " mode..." << endl;
+
+    void display() override {
+        cout << "Displaying PNG image, handling transparency if present." << std::endl;
     }
 };
+
+class BMPImage : public Image {
+public:
+    void load() override {
+        cout << "Loading BMP image directly from uncompressed pixel data." << std::endl;
+    }
+
+    void display() override {
+        cout << "Displaying BMP image with straightforward pixel mapping." << std::endl;
+    }
+};
+
+void processImage(Image* img) {
+    cout << "\n--- Processing an image ---" << std::endl;
+    img->load();
+    img->display();
+    cout << "--- Image processing complete ---" << std::endl;
+}
 
 int main() {
-    SmartOven myOven("Samsung", 1500, "Bake");
-    myOven.start();
+    JPEGImage jpegImg;
+    PNGImage pngImg;
+    BMPImage bmpImg;
+
+    processImage(&jpegImg);
+    processImage(&pngImg);
+    processImage(&bmpImg);
+
+    Image* myImage = new JPEGImage();
+    myImage->load();
+    myImage->display();
+
+
     return 0;
 }

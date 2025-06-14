@@ -1,15 +1,27 @@
-#include<iostream>
-using namespace std ;
+#include <iostream>
+#include<string>
+using namespace std;
+class parent
+{
+    public:
+  virtual void display()
+  {
+    cout<<"parent class"<<endl;
+  }
+};
+class child:public parent
+{
+    public:
+    void display() override
+    {
+        cout<<"child class"<<endl;
+    }
+};
 int main()
 {
-    int radius;
-    int height;
-    cout<<"enter radius of cylinder= ";
-    cin>>radius;
-    cout<<"enter height of cylinder= ";
-    cin>>height;
-    int volume=3.14*radius*radius*height ;
-    cout<<"volume of the cylinder is = "<<volume;
+    parent *p1;
+    child c1;
+    p1=&c1;
+    p1->display();
     return 0;
-
 }

@@ -1,27 +1,39 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+class doctor
+{
+ public:
+  string name="ali";
+};
+class ward
+{
+    public:
+   void use_doctor(doctor &obj)
+   {
+     cout<<"name of doctor ="<<obj.name<<endl;
+   }
+};
+class hospital
+{
+ public:
+ ward w1;
+ hospital(ward &obj)
+ {
+    w1=obj;
+ }
+ void callDoctor(doctor &d)
+ {
+    w1.use_doctor(d);
+ }
+};
+
 int main()
 {
-    int num=1;
-    while(true)
-    {
-        ++num;
-        if(num%3==0)
-        {
-            continue;
-        }
-        if(num==50)
-        {
-            break;
-        }
-        if(num%2==0)
-        {
-            num+=3;
-        }
-        else{
-            num+=2;
-        }
-        cout<<num<<" ";
-    }
-    return 0;
+  doctor d1;
+  ward w2;
+  w2.use_doctor(d1);
+  hospital h1(w2);
+  h1.callDoctor(d1);
+
+ return 0;
 }
